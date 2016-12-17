@@ -27,7 +27,7 @@ wss.on('connection', function connection(ws) {
   const id = uuid();
   const httpRequest = ws.upgradeReq;
   // X-Forwarded-For for Heroku
-  const ip = httpRequest.headers['X-Forwarded-For'] || httpRequest.headers.host;
+  const ip = httpRequest.headers['x-forwarded-for'] || httpRequest.connection.remoteAddress;
 
   const idAndIp = id + ' [' + ip + ']';
 
