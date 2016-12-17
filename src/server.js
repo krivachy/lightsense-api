@@ -40,6 +40,18 @@ wss.on('connection', function connection(ws) {
   })
 });
 
+function pingClients(callback) {
+  wss.clients.forEach(function each(client) {
+    client.ping('ping');
+  });
+  callback();
+}
+
+function scheduleClientPing() {
+  setTimeout(pingClients, 45000, scheduleClientPing);
+}
+
 wss.on('listening', function () {
   console.log('Listening on *:' + port);
+  scheduleClientPing();
 });
