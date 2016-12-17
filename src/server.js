@@ -1,11 +1,11 @@
-var port = 3000;
-var wssOptions = {
+const port = 3000;
+const wssOptions = {
   port: port,
   clientTracking: true,
   // we know we're dealing with quite small messages, let's try to increase security
   maxPayload: 30
 };
-var WebSocketServer = require('ws').Server
+const WebSocketServer = require('ws').Server
     , wss = new WebSocketServer(wssOptions);
 const uuid = require('uuid/v4');
 
@@ -16,7 +16,7 @@ wss.broadcast = function broadcast(data) {
   });
 };
 
-var minutes = 5;
+const minutes = 5;
 
 wss.on('connection', function connection(ws) {
   const id = uuid();
@@ -28,7 +28,7 @@ wss.on('connection', function connection(ws) {
     if (data == 'turn_on') {
       wss.clients.forEach(function each(client) {
         if (client !== ws) {
-          var message = 'trigger_on|' + minutes;
+          const message = 'trigger_on|' + minutes;
           console.log('Sending to client ' + client.clientId, message);
           client.send(message);
         }
