@@ -55,7 +55,8 @@ Where the 5 indictes for how many minutes it should turn on.
 ## Security
 
 In production do the following:
-1) Use `wss://` instead of `ws://`
-2) Set the SECRET_TOKEN envvar to something actually secret
+
+ 1. Use `wss://` instead of `ws://`
+ 2. Set the SECRET_TOKEN envvar to something actually secret
 
 Since this is meant for arduino devices other authorization or authentication methods are not planned.
