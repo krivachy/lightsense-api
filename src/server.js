@@ -30,7 +30,7 @@ wss.on('connection', function connection(ws) {
       wss.clients.forEach(function each(client) {
         if (client !== ws) {
           console.log('Sending to client ' + client.clientId, triggerOnMessage);
-          client.send(message);
+          client.send(triggerOnMessage);
         }
       });
     }
