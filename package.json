@@ -2,13 +2,14 @@
   "name": "lightsense-api",
   "version": "1.0.0",
   "description": "Sense the presence of others via lights!",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "hapi": "^16.0.1"
+    "uuid": "^3.0.1",
+    "ws": "^1.1.1"
   }
 }
