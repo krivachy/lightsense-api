@@ -1,8 +1,12 @@
 const port = process.env.PORT || 3000;
+const secretToken = process.env.SECRET_TOKEN || 'secret';
+const secretPath = '/' + secretToken;
 const wssOptions = {
   port: port,
   clientTracking: true,
-  // we know we're dealing with quite small messages, let's try to increase security
+  // Use the path as "authentication", only allow clients to connect this path
+  path: secretPath,
+  // we know we're dealing with quite small messages, let's increase security by not allowing large payloads
   maxPayload: 30
 };
 const WebSocketServer = require('ws').Server
@@ -21,10 +25,17 @@ const triggerOnMessage = 'trigger_on|' + minutes;
 
 wss.on('connection', function connection(ws) {
   const id = uuid();
-  ws.clientId = id;
-  console.log('Connect from client', id);
+  const httpRequest = ws.upgradeReq;
+  // X-Forwarded-For for Heroku
+  const ip = httpRequest.headers['X-Forwarded-For'] || httpRequest.headers.host;
+
+  const idAndIp = id + ' [' + ip + ']';
+
+  ws.clientId = idAndIp;
+  console.log('Connect from client', idAndIp);
+
   ws.on('message', function message(data) {
-    console.log('Message from client ' + id + ', data:', data);
+    console.log('Message from client ' + idAndIp + ', data:', data);
     // Broadcast to everyone else.
     if (data == 'turn_on') {
       wss.clients.forEach(function each(client) {
@@ -35,6 +46,7 @@ wss.on('connection', function connection(ws) {
       });
     }
   });
+
   ws.on('close', function (code, reason) {
     console.log('Disconnect from client', id, reason);
   })
