@@ -51,8 +51,12 @@ wss.on('connection', function connection(ws) {
   });
 
   ws.on('close', function (code, reason) {
-    console.log('Disconnect from client', id, reason);
-  })
+    console.log('Disconnect from client', idAndIp, reason);
+  });
+
+  ws.on('error', function (err) {
+    console.error('Error from ', idAndIp, err);
+  });
 });
 
 function pingClients(callback) {
