@@ -36,6 +36,7 @@ wss.on('connection', function connection(ws) {
   ws.clientId = idAndIp;
   console.log('Connect from client', idAndIp);
   console.log('Request headers', httpRequest.headers);
+  console.log('Request connection', httpRequest.connection);
 
   ws.on('message', function message(data) {
     console.log('Message from client ' + idAndIp + ', data:', data);
