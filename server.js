@@ -56,6 +56,7 @@ wss.on('connection', function connection(ws) {
 
   ws.on('error', function (err) {
     console.error('Error from ', idAndIp, err);
+    console.log('ws.upgradeReq.connection', ws.upgradeReq.connection);
   });
 });
 
