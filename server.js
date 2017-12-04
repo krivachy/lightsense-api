@@ -1,6 +1,6 @@
 // Config
 const port = process.env.PORT || 3000;
-const minutes = process.env.TRIGGER_ON_MINUTES || 0.5;
+const minutes = parseFloat(process.env.TRIGGER_ON_MINUTES || 0.5);
 const secretToken = process.env.SECRET_TOKEN || 'secret';
 const secretPath = '/' + secretToken;
 
