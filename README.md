@@ -35,28 +35,12 @@ Listening on *:3000
 
 ## Trying it out
 
-Connect to the server at `ws://localhost:3000/secret` with 2 WebSocket clients or with this [Chrome extension](https://chrome.google.com/webstore/detail/smart-websocket-client/omalebghpgejjiaoknljcfmglgbpocdp)
-in multiple browser tabs.
-
-Send it a simple message as a plain string with one client:
+The arduino's use polling, there are 2 endpoints:
 
 ```
-turn_on
+GET /secret => gets a 1 or 0 depending on if the light should be on
+GET /secret/on => turns the light on for TRIGGER_ON_MINUTES minutes
 ```
 
-In the other client see the response:
+To change the word `secret` in the URL slug override `SECRET_TOKEN`
 
-```
-trigger_on|5
-```
-
-Where the 5 indictes for how many minutes it should turn on.
-
-## Security
-
-In production do the following:
-
- 1. Use `wss://` instead of `ws://`
- 2. Set the SECRET_TOKEN envvar to something actually secret
-
-Since this is meant for arduino devices other authorization or authentication methods are not planned.
