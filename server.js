@@ -39,7 +39,7 @@ server.route({
 });
 
 server.route({
-    method: 'POST',
+    method: 'GET',
     path: secretPath + '/on',
     handler: function (request, h) {
         console.log(`[${request.headers['x-forwarded-for'] || request.info.remoteAddress}] Turn on requested`);
