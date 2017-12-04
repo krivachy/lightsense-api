@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Sense the presence of others via lights!",
   "engines": {
-    "node": "6.11.1"
+    "node": "8.9.1"
   },
   "main": "server.js",
   "scripts": {
