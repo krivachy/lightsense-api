@@ -39,10 +39,10 @@ server.route({
 });
 
 server.route({
-    method: 'GET',
+    method: 'POST',
     path: secretPath + '/on',
     handler: function (request, h) {
-        console.log(`[${request.info.referrer || request.info.remoteAddress}] Turn on requested`);
+        console.log(`[${request.headers['x-forwarded-for'] || request.info.remoteAddress}] Turn on requested`);
         turnOn();
         startTimerFor(turnOff);
         return state;
