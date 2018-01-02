@@ -8,7 +8,6 @@ const Hapi = require('hapi');
 
 const server = new Hapi.Server({ port, host: '0.0.0.0' });
 
-
 let state = 0;
 let timer;
 
@@ -24,9 +23,9 @@ const turnOff = () => {
 function startTimerFor(func) {
     if (timer) {
         clearTimeout(timer);
-    } else {
-        timer = setTimeout(func, minutes * 60 * 1000)
     }
+    const timeout = minutes * 60 * 1000;
+    timer = setTimeout(func, timeout);
 }
 
 server.route({
@@ -52,7 +51,8 @@ server.route({
 async function start() {
     try {
         await server.start();
-        console.log('Server started')
+        console.log('Server started');
+        console.log(`Config variables: minutes=${minutes} secretToken=${secretToken} port=${port}`)
     } catch (err) {
         console.log(err);
     }
